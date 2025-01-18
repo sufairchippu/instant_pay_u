@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:instant_pay_u/model/dummy_db.dart';
 import 'package:instant_pay_u/services/utilities/color_constant.dart';
+import 'package:instant_pay_u/view/one%20one%20screen/one_onescreen_view.dart';
 
 class HomescreenView extends StatefulWidget {
   const HomescreenView({super.key});
@@ -15,7 +16,7 @@ class _HomescreenViewState extends State<HomescreenView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final dummdatatransMethod = DummyDb().transferMethode;
   int personTransNum = 2;
-  int personTransNumMax = DummyDb().transferMethode.length;
+  int personTransNumMax = 5; //DummyDb().transferMethode.length
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +88,11 @@ class _HomescreenViewState extends State<HomescreenView> {
                                 backgroundColor: ColorConstant.PRIMARYCOLOR2,
                                 radius: 35,
                                 child: Icon(
-                                  DummyDb().transferMethode[index]["icon"],
+                                  dummdatatransMethod[index]["icon"],
                                   size: 50,
                                   color: ColorConstant.SECONDARY2,
                                 )),
-                            Text(DummyDb().transferMethode[index]["title"])
+                            Text(dummdatatransMethod[index]["title"])
                           ],
                         ),
                       ),
@@ -109,11 +110,11 @@ class _HomescreenViewState extends State<HomescreenView> {
                                 radius: 35,
                                 backgroundColor: ColorConstant.PRIMARYCOLOR2,
                                 child: Icon(
-                                  DummyDb().transferMethode[index + 3]["icon"],
+                                  dummdatatransMethod[index + 3]["icon"],
                                   size: 50,
                                   color: ColorConstant.SECONDARY2,
                                 )),
-                            Text(DummyDb().transferMethode[index + 3]["title"])
+                            Text(dummdatatransMethod[index + 3]["title"])
                           ],
                         ),
                       ),
@@ -138,22 +139,31 @@ class _HomescreenViewState extends State<HomescreenView> {
                             4, // Number of items per row
                             (colIndex) {
                               int itemIndex = rowIndex * 4 + colIndex;
-                              if (itemIndex <
-                                  DummyDb().transferMethode.length) {
+                              if (itemIndex < dummdatatransMethod.length) {
                                 return Column(
                                   children: [
-                                    CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor:
-                                          ColorConstant.PRIMARYCOLOR2,
-                                      child: Icon(
-                                        DummyDb().transferMethode[itemIndex]
-                                            ["icon"],
-                                        color: ColorConstant.SECONDARY2,
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  OneOnescreenView(),
+                                            ));
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 25,
+                                        backgroundColor:
+                                            ColorConstant.PRIMARYCOLOR2,
+                                        child: Icon(
+                                          dummdatatransMethod[itemIndex]
+                                              ["icon"],
+                                          color: ColorConstant.SECONDARY2,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(height: 8),
-                                    Text(DummyDb().transferMethode[itemIndex]
+                                    Text(dummdatatransMethod[itemIndex]
                                         ["title"]),
                                   ],
                                 );
@@ -167,6 +177,7 @@ class _HomescreenViewState extends State<HomescreenView> {
                       ),
                     ),
                     Positioned(
+                      //the button more people
                       right: 0,
                       bottom: 29,
                       child: InkWell(

@@ -17,6 +17,7 @@ class _RegistertionscreenViewState extends State<RegistertionscreenView> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String selectedCountryCode = "+91";
+  bool checkValue=false;
 
   // Validation function for phone numbers
   String? validatePhone(String? phoneNum) {
@@ -93,17 +94,16 @@ class _RegistertionscreenViewState extends State<RegistertionscreenView> {
                       ],
                     ),
                     const SizedBox(height: 25),
-                    InkWell(
-                      child: Container(
-                        height: 500,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Text(
-                                  """
+                    SizedBox(
+                      height: 500,
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                """
                              Privacy Policy for [Your App Name]
                                     
                                     Effective Date: [Insert Date]
@@ -119,12 +119,16 @@ class _RegistertionscreenViewState extends State<RegistertionscreenView> {
                                     
                                     We may update this policy periodically to reflect changes in our practices, technologies, or legal requirements. The updated version will be posted in the app, and significant changes will be communicated to you. If you have any questions or concerns about this Privacy Policy, please contact us at [Insert Email Address], [Insert Phone Number], or [Insert Company Address].
                               """,
-                                  style: GoogleFonts.abel(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
+                                style: GoogleFonts.abel(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16),
+                              ),
+                              Row(children: [Checkbox(value: checkValue, onChanged: (value) {setState(() {
+                                checkValue=value??false;
+                              });
+                                
+                              },)],)
+                            ],
                           ),
                         ),
                       ),
@@ -137,7 +141,8 @@ class _RegistertionscreenViewState extends State<RegistertionscreenView> {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Validate the form
+                        if (checkValue==true) {
+                            // Validate the form
                         if (formKey.currentState?.validate() ?? false) {
                           log("Phone number: $selectedCountryCode${phoneController.text}");
                           Navigator.pushReplacement(
@@ -156,6 +161,10 @@ class _RegistertionscreenViewState extends State<RegistertionscreenView> {
                                 content: Text('Please fix the errors')),
                           );
                         }
+                        }else{
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Agree the terms and policy for the")));
+                        }
+                      
                       },
                       child: const Text("Register"),
                     ),
