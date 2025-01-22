@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:instant_pay_u/model/dummy_db.dart';
 import 'package:instant_pay_u/services/global%20widget/main_logo_widget.dart';
 import 'package:instant_pay_u/services/utilities/color_constant.dart';
+import 'package:instant_pay_u/view/login%20screens/sign%20up/sign_up_screen.dart';
 import 'package:instant_pay_u/view/registertion%20screen/registertoionscreen_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -60,7 +61,7 @@ class _OnboardingscreenViewState extends State<OnboardingscreenView> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => RegistertionscreenView()),
+                          builder: (context) => SignUpScreen()),
                     );
                   } else {
                     pageController.nextPage(

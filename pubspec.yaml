@@ -38,6 +38,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   country_code_picker: ^3.1.0
   chat_bubbles: ^1.7.0
+  mobile_scanner: ^6.0.3
 
 dev_dependencies:
   flutter_test:

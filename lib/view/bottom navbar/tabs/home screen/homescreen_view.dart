@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:instant_pay_u/model/dummy_db.dart';
 import 'package:instant_pay_u/services/utilities/color_constant.dart';
+import 'package:instant_pay_u/services/utilities/image_constant.dart';
+import 'package:instant_pay_u/view/bottom%20navbar/tabs/home%20screen/qr_code_scanner.dart';
 import 'package:instant_pay_u/view/one%20one%20screen/one_onescreen_view.dart';
 
 class HomescreenView extends StatefulWidget {
@@ -59,20 +61,32 @@ class _HomescreenViewState extends State<HomescreenView> {
                 ),
               ),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.qr_code_scanner_sharp,
-                    size: 95,
-                    color: ColorConstant.PRIMARYCOLOR2,
-                  ),
-                  SizedBox(width: 25),
-                  Text(
-                    "Scan it \n Pay it",
-                    style: GoogleFonts.asar(fontSize: 25),
-                  ),
-                ],
+              InkWell(onDoubleTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => QrCodeScanner(),));
+                
+              },
+                child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    child: Stack(children: [
+                      Center(child: Image.asset(ImageConstant.RANDOMSTACK1)),
+                      Positioned(top: 25,left: 148,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.qr_code_scanner_sharp,
+                              size: 95,
+                              color: ColorConstant.PRIMARYCOLOR2,
+                            ),
+                            SizedBox(width: 25),
+                            Text(
+                              "Scan it \n Pay it",
+                              style: GoogleFonts.asar(fontSize: 25),
+                            ),
+                          ],
+                        ),
+                      )
+                    ])),
               ),
               Container(
                 padding: EdgeInsets.all(30),
@@ -122,6 +136,7 @@ class _HomescreenViewState extends State<HomescreenView> {
                   ],
                 ),
               ),
+              
               Text(
                 "Recent person Transaction",
                 style: GoogleFonts.spaceGrotesk(),
